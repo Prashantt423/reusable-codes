@@ -1,6 +1,9 @@
 # reusable-codes
 
-```
+
+#Inversion count
+
+```cpp
 #include <bits/stdc++.h> 
 long long merge(long long *arr,int l,int mid,int r){
     int n1 = mid - l + 1;
