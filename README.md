@@ -1,7 +1,7 @@
 # reusable-codes
 
 
-#Inversion count
+# Inversion count
 
 ```cpp
 #include <bits/stdc++.h> 
