@@ -1,6 +1,6 @@
 # reusable-codes
 
-`
+```
 #include <bits/stdc++.h> 
 long long merge(long long *arr,int l,int mid,int r){
     int n1 = mid - l + 1;
@@ -46,4 +46,4 @@ long long countInversion(long long *arr,int l,int r){
 long long getInversions(long long *arr, int n){
     return countInversion(arr,0,n-1);
 }
-`
+```
