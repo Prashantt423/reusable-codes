@@ -52,7 +52,7 @@ long long getInversions(long long *arr, int n){
 ```
 
 # Segment Tree
-```
+```cpp
     class SGTree {
 		vector<int>seg;
 		bool isMaxm = false; // minimum by default;
