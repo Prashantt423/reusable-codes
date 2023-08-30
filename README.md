@@ -90,4 +90,4 @@ long long getInversions(long long *arr, int n){
 			seg[ind] = isMaxm ? max(seg[2*ind+1],seg[2*ind+2]) : min(seg[2*ind+1],seg[2*ind+2]);
 		}
 };
-    ```
+```
