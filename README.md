@@ -91,3 +91,67 @@ long long getInversions(long long *arr, int n){
 		}
 };
 ```
+# Hash Function using 2 modulos
+```cpp
+	int add(int a,int b,int mod){
+	int res = (a+b)%mod;
+	if(res<0)
+		return res+mod;
+	return res;
+}
+int mult(int a,int b,int mod){
+	int res = (a*1LL*b)%mod;
+	return res<0 ? res+mod : res;
+}
+
+int pow(int a, int b , int mod){
+	int res=1;
+	while(b){
+		if((b&1)==1){
+			res = mult(res,a,mod);
+		}
+		a = mult(a,a,mod);
+		b>>=1;
+	}
+
+	return res;
+}
+
+
+class Hash {
+private:
+	vector<int>p_inv1,p_inv2;
+	vector<pair<int,int>>hash;
+	int p,M1,M2;
+public:
+	Hash(int n,int pValue,int modValue1,int modValue2): p_inv1(n),p_inv2(n),hash(n),p(pValue),M1(modValue1),M2(modValue2) {
+		int pw_inv1 = pow(p,M1-2,M1);
+		int pw_inv2 = pow(p,M2-2,M2);
+		p_inv1[0]=1;
+		p_inv2[0]=1;
+		for(int i=1;i<n;i++){
+			p_inv1[i] = mult(p_inv1[i-1],pw_inv1,M1);
+			p_inv2[i] = mult(p_inv2[i-1],pw_inv2,M2);
+		}
+	}
+	void Build(string &str){
+		int p_pow1=1,p_pow2=1;
+		for(int i=0;i<str.size();i++){
+			int h1 = add((i==0) ? 0 : hash[i-1].first,mult(str[i]-'a'+1,p_pow1,M1),M1);
+			int h2 = add((i==0) ? 0 : hash[i-1].second,mult(str[i]-'a'+1,p_pow2,M2),M2);
+			// deb2(h1,h2);
+			hash[i]={h1,h2};
+			p_pow1 = mult(p_pow1,p,M1);
+			p_pow2 = mult(p_pow2,p,M2);
+		}	
+	}
+
+	pair<int,int> getHash(int x,int y){
+		int res1 = add ( hash[y].first , (x==0) ? 0 : -hash[x-1].first , M1 );
+		int res2 = add ( hash[y].second , (x==0) ? 0 : -hash[x-1].second , M2 );
+		res1 = mult (res1, p_inv1[x] , M1 );
+		res2 = mult (res2, p_inv2[x] , M2);
+		return {res1,res2};
+	}
+};
+```
